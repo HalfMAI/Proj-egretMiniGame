@@ -1,0 +1,31 @@
+{
+	"initial": [
+		"libs/modules/egret/egret.js",
+		"libs/modules/egret/egret.web.js",
+		"libs/modules/game/game.js",
+		"libs/modules/res/res.js",
+		"libs/modules/eui/eui.js",
+		"libs/modules/tween/tween.js",
+		"fbinstant/fbinstant.js",
+		"promise/bin/promise.js"
+	],
+	"game": [
+		"bin-debug/ECS/ObjectPool.js",
+		"bin-debug/ProjectE/World.js",
+		"bin-debug/ThemeAdapter.js",
+		"bin-debug/ECS/BaseComponent.js",
+		"bin-debug/ECS/BaseEntity.js",
+		"bin-debug/ECS/BaseSystem.js",
+		"bin-debug/ECS/ComponentManager.js",
+		"bin-debug/ECS/EntityManager.js",
+		"bin-debug/Main.js",
+		"bin-debug/ECS_Game/Components.js",
+		"bin-debug/ECS_Game/Systems.js",
+		"bin-debug/ProjectE/FBImp.js",
+		"bin-debug/ProjectE/ProjEMain.js",
+		"bin-debug/ProjectE/ResourceManager.js",
+		"bin-debug/ProjectE/Utility.js",
+		"bin-debug/AssetAdapter.js",
+		"bin-debug/ProjectE/WorldTickmanager.js"
+	]
+}
