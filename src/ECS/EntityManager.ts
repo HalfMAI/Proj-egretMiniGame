@@ -42,9 +42,9 @@ module ECS {
 			return tmpEntity;
 		}
 
-		public static RemoveEntity(entity:any) {
+		public static RemoveEntity(entity:BaseEntity) {
 			EntityManager.RemoveAllComponent(entity);
-			EntityManager.entityObjPool.RemoveObjToPool(entity);
+			EntityManager.entityObjPool.RemoveObjToPool(entity.tag, entity);
 		}
 
 		//component operator
@@ -65,7 +65,7 @@ module ECS {
 				let tmpIndex = entity.components[component.componentTag].indexOf(component);
 				if (tmpIndex > -1) {
 					entity.components[component.componentTag].splice(tmpIndex, 1);
-					ComponentManager.RemoveComponent(component);
+					ComponentManager.RemoveComponent(component.componentTag, component);
 				}				
 			}
 		}

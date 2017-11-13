@@ -18,8 +18,8 @@ module ECS {
 			return tmpObj;
 		}
 
-		static RemoveComponent(component) {
-			ComponentManager.componentObjPool.RemoveObjToPool(component);
+		static RemoveComponent(tag, component) {
+			ComponentManager.componentObjPool.RemoveObjToPool(tag, component);
 		}
 	}
 }

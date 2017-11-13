@@ -18,7 +18,7 @@
 		"bin-debug/ECS/BaseSystem.js",
 		"bin-debug/ECS/ComponentManager.js",
 		"bin-debug/ECS/EntityManager.js",
-		"bin-debug/Main.js",
+		"bin-debug/ProjectE/WorldTickmanager.js",
 		"bin-debug/ECS_Game/Components.js",
 		"bin-debug/ECS_Game/Systems.js",
 		"bin-debug/ProjectE/FBImp.js",
@@ -26,6 +26,6 @@
 		"bin-debug/ProjectE/ResourceManager.js",
 		"bin-debug/ProjectE/Utility.js",
 		"bin-debug/AssetAdapter.js",
-		"bin-debug/ProjectE/WorldTickmanager.js"
+		"bin-debug/Main.js"
 	]
 }

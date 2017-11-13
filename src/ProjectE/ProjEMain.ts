@@ -44,16 +44,16 @@ module ProjectE {
 			}, this);
 			tmpTimer.start();
 
-			let tmpTimerDes = new egret.Timer(1000);
-			tmpTimerDes.addEventListener(egret.TimerEvent.TIMER, (e) => {
-				let tmp = this.tmpTest[this.curCount-1];
-				this.tmpTest.splice(this.tmpTest.indexOf(tmp));
-				ECS.EntityManager.RemoveEntity(tmp);
+			// let tmpTimerDes = new egret.Timer(1000);
+			// tmpTimerDes.addEventListener(egret.TimerEvent.TIMER, (e) => {
+			// 	let tmp = this.tmpTest[this.curCount-1];
+			// 	this.tmpTest.splice(this.tmpTest.indexOf(tmp));
+			// 	ECS.EntityManager.RemoveEntity(tmp);
 
-				this.curCount--;
-				this.curCount = Math.max(this.curCount, 0);
-			}, this);
-			tmpTimerDes.start();
+			// 	this.curCount--;
+			// 	this.curCount = Math.max(this.curCount, 0);
+			// }, this);
+			// tmpTimerDes.start();
 		}
 	}
 }
