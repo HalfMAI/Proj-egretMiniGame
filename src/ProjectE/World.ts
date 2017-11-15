@@ -1,11 +1,12 @@
 class World extends egret.DisplayObjectContainer {
-	private static staticSelf:World;
+	private static staticSelf:World = null;
 
-	private worldTick:WorldTickManager;
+	private worldTick:WorldTickManager = null;
+	private _levelMap:Array<string> = [];
+	private curLevel:IBaseLevel = null;
 
 	protected constructor() {
 		super();
-
 		World.staticSelf = this;
 
 		this.worldTick = new WorldTickManager();
@@ -17,11 +18,31 @@ class World extends egret.DisplayObjectContainer {
 		this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
 		this.onWorldLoaded();
 
+		this.addEventListener(egret.Event.ENTER_FRAME, this._onUpdate, this);
+	}
 
-		this.addEventListener(egret.Event.ENTER_FRAME, (evt:egret.Event) => {
-			let tmpDeltaTime = this.worldTick.onUpdateDeltaTime();
-			this.onUpdate(tmpDeltaTime)
-		}, this);
+	private _onUpdate(evt:egret.Event) {
+		let tmpDeltaTime = this.worldTick.onUpdateDeltaTime();
+		this.onUpdate(tmpDeltaTime)
+		if (this.curLevel) {
+			this.curLevel.onLevelUpdate(tmpDeltaTime);
+		}
+	}
+
+	public LoadLevel(level:string) {
+		let nextLevel;
+		try {
+			nextLevel = new window[level]();	//HACK
+		} catch (error) {
+			egret.error("error:" + error.message);
+			return;
+		}		
+
+		if (this.curLevel) {
+			this.curLevel.onLevelUnloaded();
+		}
+		this.curLevel = nextLevel;
+		this.curLevel.onLevelLoaded();
 	}
 
 	public onWorldLoaded(){}

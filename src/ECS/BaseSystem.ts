@@ -1,5 +1,5 @@
 module ECS {
 	export interface BaseSystem {		
-		systemUpdateEntity(entities: BaseEntity[]);
-	}	
+		systemUpdateEntity(entities: BaseEntity[], deltaTime:number);
+	}
 }

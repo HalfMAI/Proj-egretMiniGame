@@ -14,7 +14,6 @@ module ECS {
 				tmpObj.componentName = name;
 				tmpObj.componentState = state;				
 			}
-			console.log(ComponentManager.componentObjPool.objPool);
 			return tmpObj;
 		}
 

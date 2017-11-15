@@ -37,8 +37,6 @@ module ECS {
 			} else {
 				tmpEntity.id = EntityManager.CreateRandomID();
 			}
-
-			console.log(EntityManager.entityObjPool.objPool);
 			return tmpEntity;
 		}
 
@@ -82,11 +80,7 @@ module ECS {
 		public static HasComponent(entity:BaseEntity, component:BaseComponent):boolean {
 			if (entity.components[component.componentTag]) {
 				let tmpIndex = entity.components[component.componentTag].indexOf(component);
-				if (tmpIndex > -1) {
-					return true;
-				} else {
-					return false;
-				}
+				return tmpIndex > -1;
 			} else {
 				return false;
 			}
