@@ -3,7 +3,7 @@ class World extends egret.DisplayObjectContainer {
 
 	private worldTick:WorldTickManager = null;
 	private _levelMap:Array<string> = [];
-	private curLevel:IBaseLevel = null;
+	private curLevel:Levels.IBaseLevel = null;
 
 	protected constructor() {
 		super();
@@ -32,7 +32,7 @@ class World extends egret.DisplayObjectContainer {
 	public LoadLevel(level:string) {
 		let nextLevel;
 		try {
-			nextLevel = new window[level]();	//HACK
+			nextLevel = new Levels[level]();	//HACK
 		} catch (error) {
 			egret.error("error:" + error.message);
 			return;
