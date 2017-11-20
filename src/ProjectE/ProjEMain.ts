@@ -3,7 +3,6 @@ module ProjectE {
 		public constructor() {
 			super(); 
 
-
 			this.LoadLevel(LevelList.TestLevel);
 		}
 	}
