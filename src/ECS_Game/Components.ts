@@ -12,6 +12,8 @@ module ECS {
 	export interface PostionState {
 		posX:number;
 		posY:number;
+		dirX:number;
+		dirY:number;
 	}
 
 	//RenderComponent
@@ -28,7 +30,9 @@ module ECS {
 		static CreatePositionComponent(x:number, y:number, name?:string) {
 			let tmpPosCom:PostionState = {
 				posX: x,
-				posY: y
+				posY: y,
+				dirX: 0,
+				dirY: 0
 			};
 			return ComponentManager.InitComponent(
 				ComponentTags.PositionCom,
@@ -37,13 +41,13 @@ module ECS {
 			);
 		}
 
-		static CreateRenderComponent(displayObj:egret.DisplayObject, name:string) {
+		static CreateRenderComponent(displayObj:egret.DisplayObject, name?:string) {
 			let tmpRenderCom:RenderState = {
 				renderBody : displayObj
 			};
 			return ComponentManager.InitComponent(
 				ComponentTags.RenderCom,
-				name,
+				name ? name : null,
 				tmpRenderCom
 			);
 		}
@@ -52,7 +56,9 @@ module ECS {
 			let resultObj;
 			let tmpPosCom:PostionState = {
 				posX: x,
-				posY: y
+				posY: y,
+				dirX: 0,
+				dirY: 0
 			};
 			let tmpRenderCom:RenderState = {
 				renderBody : new egret.Sprite()

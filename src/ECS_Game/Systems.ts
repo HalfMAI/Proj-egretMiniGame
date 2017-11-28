@@ -1,5 +1,5 @@
 module ECS {
-	export class InputSystem implements BaseSystem {
+	export class InputSystem implements IBaseSystem {
 		constructor() {
 			World.getWorldInstance().addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchBegin, this);
 			World.getWorldInstance().addEventListener(egret.TouchEvent.TOUCH_MOVE, this.onTouchMove, this);
@@ -20,30 +20,30 @@ module ECS {
 			
 		}
 
-		public systemUpdateEntity(entities: BaseEntity[], deltaTime:number) {
+		public systemUpdateEntity(deltaTime:number) {
 
 		}
 	}
 
-	export class testSystem implements BaseSystem {		
-		public systemUpdateEntity(entities: BaseEntity[], deltaTime:number) {
-			entities.forEach(entity => {
-				let tmpPosComponents:BaseComponent[] = EntityManager.GetComponents(entity, ComponentTags.PositionCom);
-				if (tmpPosComponents) {
-					tmpPosComponents.forEach(element => {
-						let tmpState:PostionState = element.componentState;
-						tmpState.posY += 30 * deltaTime;
-					});
-
-					let tmpRenderComponents:BaseComponent[] = EntityManager.GetComponents(entity, ComponentTags.RenderCom);
-					if (tmpRenderComponents) {
-						tmpRenderComponents.forEach(element => {
-							let tmpState:RenderState = element.componentState;
-							tmpState.renderBody.x = tmpPosComponents[0].componentState.posX;
-							tmpState.renderBody.y = tmpPosComponents[0].componentState.posY;
-						});
-					}				
+	//BaseSystem
+	export class RenderPosSyncSystem implements IBaseSystem {
+		public systemUpdateEntity(deltaTime:number) {
+			let tmpComponentList = ComponentManager.componentObjList[ComponentTags.PositionCom];
+			tmpComponentList.forEach(component => {				
+				let tmpRenderComponent:BaseComponent = EntityManager.GetComponent(component.componentParent, ComponentTags.RenderCom);
+				if (tmpRenderComponent) {
+					tmpRenderComponent.componentState.renderBody.x = component.componentState.posX;
+					tmpRenderComponent.componentState.renderBody.y = component.componentState.posY;
 				}
+			});
+		}
+	}
+
+	export class MovementSystem implements IBaseSystem {		
+		public systemUpdateEntity(deltaTime:number) {
+			let tmpComponentList = ComponentManager.componentObjList[ComponentTags.PositionCom];
+			tmpComponentList.forEach(component => {
+				component.componentState.posY += 30 * World.getDeltaTime();
 			});
 		}
 	}

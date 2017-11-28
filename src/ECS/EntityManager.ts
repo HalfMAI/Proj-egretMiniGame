@@ -1,13 +1,11 @@
 module ECS {
 	export class EntityManager {
 		static entityObjPool:ObjectPool<BaseEntity> = new ObjectPool<BaseEntity>();
-		static renderObjList:Array<egret.DisplayObject> = new Array<egret.DisplayObject>();
 
 		private static _AddDisplayObj(entity:BaseEntity) {
 			if (!entity.components[ComponentTags.RenderCom]) {return;}
 			let tmpRenderState:RenderState = entity.components[ComponentTags.RenderCom][0].componentState;
 			if (tmpRenderState) {
-				EntityManager.renderObjList.push(tmpRenderState.renderBody);
 				World.getWorldInstance().addChild(tmpRenderState.renderBody);
 			}
 		}
@@ -16,8 +14,6 @@ module ECS {
 			//remove displayObj child
 			let tmpRenderState:RenderState = entity.components[ComponentTags.RenderCom][0].componentState;
 			if (tmpRenderState) {
-				let tmpIndex = EntityManager.renderObjList.indexOf(tmpRenderState.renderBody);
-				EntityManager.renderObjList.splice(tmpIndex, 1);
 				World.getWorldInstance().removeChild(tmpRenderState.renderBody);
 			}
 		}
@@ -51,18 +47,20 @@ module ECS {
 				entity.components[component.componentTag] = new Array<BaseComponent>();
 			}			
 			entity.components[component.componentTag].push(component);
+			component.componentParent = entity;		//componentParent
 			EntityManager._AddDisplayObj(entity);
 		}
 		public static RemoveComponent(entity:BaseEntity, component:BaseComponent) {		
-			let tmpCurComponent = entity.components[component.componentTag];	
-			if (tmpCurComponent) {
+			let tmpCurComponents = entity.components[component.componentTag];	
+			if (tmpCurComponents) {
 				if (component.componentTag === ComponentTags.RenderCom) {
 					EntityManager._RemoveDisplayObj(entity);
 				}
 
-				let tmpIndex = entity.components[component.componentTag].indexOf(component);
+				let tmpIndex = tmpCurComponents.indexOf(component);
 				if (tmpIndex > -1) {
-					entity.components[component.componentTag].splice(tmpIndex, 1);
+					tmpCurComponents.splice(tmpIndex, 1);					
+					component.componentParent = null;		//componentParent
 					ComponentManager.RemoveComponent(component.componentTag, component);
 				}				
 			}
@@ -86,8 +84,21 @@ module ECS {
 			}
 		}
 
-		public static GetComponents(entity:BaseEntity, componentTag:ComponentTags):any[] {
+		public static GetComponents(entity:BaseEntity, componentTag:ComponentTags):BaseComponent[] {
 			return entity.components[componentTag];
+		}
+
+		public static GetComponent(entity:BaseEntity, componentTag:ComponentTags):BaseComponent {
+			let tmpComponents = entity.components[componentTag];
+			if (!tmpComponents || tmpComponents.length == 0) {
+				return null;
+			}
+			if (tmpComponents.length > 1) {
+				egret.error("The Entity Contain Multi-Component with SAME TAG");
+				return null;
+			} else {					
+				return tmpComponents[0];
+			}
 		}
 	}
 	

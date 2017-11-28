@@ -1,5 +1,6 @@
 module Levels {
-	export interface IBaseLevel {
+	export interface IBaseLevel {		
+		systemList:Array<ECS.IBaseSystem>;
 		onLevelLoaded();
 		onLevelUpdate(deltaTime:number);
 		onLevelUnloaded();

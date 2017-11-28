@@ -1,9 +1,16 @@
 module ProjectE {
-	export class ProjEMainContainer extends World {
+	export class ProjEMainContainer extends ECS.World {
 		public constructor() {
 			super(); 
 
-			this.LoadLevel(Levels.LevelList.TestLevel);
+		}
+
+		public onWorldLoaded(){
+			this.LoadLevel(Levels.LevelList.MainLevel);
+		}
+
+		public onUpdate(deltaTime:number){
+
 		}
 	}
 }

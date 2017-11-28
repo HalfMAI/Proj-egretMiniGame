@@ -12,15 +12,15 @@
 	"game": [
 		"bin-debug/ECS/ObjectPool.js",
 		"bin-debug/ECS_World/World.js",
-		"bin-debug/ECS_Game/Systems.js",
+		"bin-debug/ECS_Game/Components.js",
 		"bin-debug/ECS/BaseComponent.js",
 		"bin-debug/ECS/BaseEntity.js",
 		"bin-debug/ECS/BaseSystem.js",
 		"bin-debug/ECS/ComponentManager.js",
 		"bin-debug/ECS/EntityManager.js",
 		"bin-debug/AssetAdapter.js",
-		"bin-debug/ECS_Game/Components.js",
-		"bin-debug/Main.js",
+		"bin-debug/ProjectE/Levels/MainLevel.js",
+		"bin-debug/ECS_Game/Systems.js",
 		"bin-debug/ThemeAdapter.js",
 		"bin-debug/ECS_World/WorldTickmanager.js",
 		"bin-debug/ProjectE/FBImp.js",
@@ -28,7 +28,6 @@
 		"bin-debug/ProjectE/ResourceManager.js",
 		"bin-debug/ProjectE/Utility.js",
 		"bin-debug/ProjectE/Levels/BaseLevel.js",
-		"bin-debug/ProjectE/Levels/MainLevel.js",
-		"bin-debug/ProjectE/Levels/TestLevel.js"
+		"bin-debug/Main.js"
 	]
 }
